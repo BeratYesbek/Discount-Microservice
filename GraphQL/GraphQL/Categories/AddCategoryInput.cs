@@ -1,6 +1,4 @@
 ﻿namespace GraphQL.GraphQL.Categories
 {
-    public class AddCategoryInput
-    {
-    }
+    public record AddCategoryInput(int ExternalId, string CategoryName);
 }

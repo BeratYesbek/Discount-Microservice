@@ -1,6 +1,6 @@
-﻿namespace GraphQL.GraphQL.Categories
+﻿using GraphQL.Models;
+
+namespace GraphQL.GraphQL.Categories
 {
-    public class AddCategoryPayload
-    {
-    }
+    public record AddCategoryPayload(Category Category);
 }
