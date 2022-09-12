@@ -1,4 +1,5 @@
-﻿using GraphQL.Data;
+﻿using System.Data;
+using GraphQL.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace GraphQL.Extensions
@@ -7,10 +8,16 @@ namespace GraphQL.Extensions
     {
         public static void RunServices(this IServiceCollection service, IConfiguration configuration)
         {
-            service.AddDbContext<DiscountDbContext>(opt =>
-                opt.UseSqlServer(configuration.GetConnectionString("DiscountConnectionString")));
+            service.AddPooledDbContextFactory<DiscountDbContext>(opt => opt.UseSqlServer
+                (configuration.GetConnectionString("DiscountConnectionString")));
 
-
+            service
+                .AddGraphQLServer()
+                .AddQueryType<DbLoggerCategory.Query>()
+                .AddType<CommandType>()
+                .AddFiltering()
+                .AddSorting()
+                .AddInMemorySubscriptions();
         }
     }
 }
