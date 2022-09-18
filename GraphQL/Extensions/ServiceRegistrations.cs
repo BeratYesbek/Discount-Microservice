@@ -1,5 +1,8 @@
 ﻿using System.Data;
 using GraphQL.Data;
+using GraphQL.GraphQL;
+using GraphQL.GraphQL.Categories;
+using GraphQL.GraphQL.Coupons;
 using Microsoft.EntityFrameworkCore;
 
 namespace GraphQL.Extensions
@@ -13,11 +16,16 @@ namespace GraphQL.Extensions
 
             service
                 .AddGraphQLServer()
-                .AddQueryType<DbLoggerCategory.Query>()
-                .AddType<CommandType>()
+                .AddQueryType<Query>()
+                .AddMutationType<Mutation>()
+                .AddType<CategoryType>()
+                .AddType<AddCategoryInputType>()
+                .AddType<AddCategoryPayloadType>()
+                .AddType<CouponType>()
+                .AddType<AddCouponInputType>()
+                .AddType<AddCategoryPayloadType>()
                 .AddFiltering()
-                .AddSorting()
-                .AddInMemorySubscriptions();
+                .AddSorting();
         }
     }
 }
